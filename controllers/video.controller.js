@@ -95,3 +95,17 @@ export const getAllVideos = async (req, res) => {
         });
     }
 };
+
+// GET VIDEO BY ID
+export const getVideoById = async (req, res) => {
+    try {
+        const video = await VideoModel.findById(req.params.id).populate("channel", "channelName");
+
+        res.status(200).json(video);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
+    }
+};
