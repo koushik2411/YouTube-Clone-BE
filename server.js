@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import channelRoutes from "./routes/channel.routes.js";
+import videoRoutes from "./routes/video.routes.js";
 
 // dotenv config
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(express.json());
 // Routes middleware
 app.use("/api/auth", authRoutes);
 app.use("/api/channel", channelRoutes);
+app.use("/api/videos", videoRoutes);
 
 app.get("/", (req, res) => {
     res.send("API Running");
