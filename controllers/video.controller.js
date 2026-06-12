@@ -109,3 +109,45 @@ export const getVideoById = async (req, res) => {
         });
     }
 };
+
+// LIKE
+export const likeVideo = async (req, res) => {
+    try {
+        const video = await VideoModel.findById(req.params.id);
+
+        if (!video.likes.includes(req.user.id)) {
+            video.likes.push(req.user.id);
+
+            video.dislikes = video.dislikes.filter((id) => id.toString() !== req.user.id);
+
+            await video.save();
+        }
+
+        res.json(video);
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+// DISLIKE
+export const dislikeVideo = async (req, res) => {
+    try {
+        const video = VideoModel.findById(req.params.id);
+
+        if (!video.dislikes.includes(req.user.id)) {
+            video.dislikes.push(req.user.id);
+
+            video.likes.filter((id) => id.toString() !== req.user.id);
+
+            await video.save();
+        }
+
+        res.json(video);
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
+    }
+};
