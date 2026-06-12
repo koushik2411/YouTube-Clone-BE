@@ -17,7 +17,10 @@ connectDB();
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+    origin: "https://youtube-clone-kk.vercel.app/",
+    credentials: true
+}));
 app.use(express.json());
 
 // Routes middleware
