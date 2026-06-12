@@ -37,7 +37,7 @@ export const getComments = async (req, res) => {
 // EDIT COMMENT
 export const updateComment = async (req, res) => {
     try {
-        const comment = await CommentModel.findById(req.params.id);
+        const comment = await CommentModel.findById(req.params.commentId);
 
         if (!comment) {
             return res.status(404).json({
@@ -69,7 +69,7 @@ export const updateComment = async (req, res) => {
 export const deleteComment = async (req, res) => {
     try {
 
-        const comment = await CommentModel.findById(req.params.id);
+        const comment = await CommentModel.findById(req.params.commentId);
 
         if (!comment) {
             return res.status(404).json({
