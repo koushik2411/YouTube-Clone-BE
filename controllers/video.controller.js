@@ -134,12 +134,12 @@ export const likeVideo = async (req, res) => {
 // DISLIKE
 export const dislikeVideo = async (req, res) => {
     try {
-        const video = VideoModel.findById(req.params.id);
+        const video = await VideoModel.findById(req.params.id);
 
         if (!video.dislikes.includes(req.user.id)) {
             video.dislikes.push(req.user.id);
 
-            video.likes.filter((id) => id.toString() !== req.user.id);
+            video.likes = video.likes.filter((id) => id.toString() !== req.user.id);
 
             await video.save();
         }

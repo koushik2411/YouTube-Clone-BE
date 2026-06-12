@@ -3,6 +3,17 @@ import ChannelModel from "../models/Channel.model.js";
 // CREATE CHANNEL
 export const createChannel = async (req, res) => {
     try {
+
+        const existingChannel = await ChannelModel.findOne({
+            owner: req.user.id,
+        });
+        
+        if(existingChannel) {
+            return res.status(400).json({
+                message: "You already have a channel",
+            });
+        }
+
         const { channelName, description, channelBanner } = req.body;
 
         const channel = await ChannelModel.create({
