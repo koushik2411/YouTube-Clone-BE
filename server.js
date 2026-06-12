@@ -20,7 +20,8 @@ const app = express();
 const allowedOrigins = [
     "https://youtube-clone-kk.vercel.app",
     "http://localhost:5173",
-]
+];
+
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
